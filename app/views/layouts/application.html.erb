@@ -8,9 +8,60 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/f391cbb1de.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
+    <header>
+      <%= link_to "Bookers", root_path %>
+      <ul>
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to user_path(current_user) do %>
+              <i class="fas fa-house-chimney"></i> Home
+            <% end %>
+          </li>
+          <li>
+            <%= link_to users_path do %>
+              <i class="fas fa-users"></i> Users
+            <% end %>
+          </li>
+          <li>
+            <%= link_to books_path do %>
+              <i class="fas fa-book-open"></i> Books
+            <% end %>
+          </li>
+          <li>
+            <%= link_to destroy_user_session_path,method: :delete do %>
+              <i class="fas fa-right-from-bracket"></i> Log out
+            <% end %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to root_path do %>
+              <i class="fas fa-house-chimney"></i> Home
+            <% end %>
+          </li>
+          <li>
+            <%= link_to home_about_path do %>
+              <i class="fas fa-link"></i> About
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_user_registration_path do %>
+              <i class="fas fa-user-plus"></i> Sign up
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_user_session_path do %>
+              <i class="fas fa-right-to-bracket"></i> Log in
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+      <%= flash[:notice] %>
+    </header>
+
     <%= yield %>
   </body>
 </html>

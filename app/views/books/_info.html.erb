@@ -1,0 +1,24 @@
+<h2>User info</h2>
+<%= image_tag book.user.get_profile_image(100,100) %>
+<table>
+  <tr>
+    <th>name</th>
+    <th><%= book.user.name %></th>
+  </tr>
+  <tr>
+    <th>introduction</th>
+    <th><%= book.user.introduction %></th>
+  </tr>
+</table>
+<%= link_to edit_user_path(book.user) do %>
+  <i class="fas fa-user-gear"></i>
+<% end %>
+
+<h2>New book</h2>
+<%= form_with model: book, url: books_path, method: :post do |f| %>
+  <%= f.label :title %><br>
+  <%= f.text_field :title %>
+  <%= f.label :opinion %><br>
+  <%= f.text_area :body %>
+  <%= f.submit %>
+<% end %>
