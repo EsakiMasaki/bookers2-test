@@ -1,3 +1,28 @@
-<%= render "info", book: @book %>
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<%= render "info", book: @book_info %>
+<div class="col-md-8 offset-md-1">
+  <h2>Book detail</h2>
+  <table class="table">
+    <tr>
+      <td>
+        <%= link_to user_path(@book.user) do %>
+          <%= image_tag @book.user.get_profile_image(100,100) %><br>
+          <%= @book.user.name %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to @book.title, book_path(@book) %>
+      </td>
+      <td>
+        <%= @book.body %>
+      </td>
+      <% if @book.user == current_user %>
+        <td>
+          <%= link_to "Edit", edit_book_path(@book),class: "btn btn-sm btn-success" %>
+        </td>
+        <td>
+          <%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-sm btn-danger" %>
+        </td>
+      <% end %>
+    </tr>
+  </table>
+</div>
