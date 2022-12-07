@@ -5,7 +5,7 @@
     <tr>
       <th>image</th>
       <th>name</th>
-      <th></th>
+      <th colspan="4"></th>
     </tr>
     <% @users.each do |user| %>
       <tr>
@@ -17,6 +17,15 @@
         </td>
         <td>
           <%= link_to "Show" , user_path(user) %>
+        </td>
+        <td>
+          フォロー数: <%= user.followings.count %>
+        </td>
+        <td>
+          フォロワー数: <%= user.followers.count %>
+        </td>
+        <td>
+          <%= render "relationships/follow", user: user %>
         </td>
       </tr>
     <% end %>
