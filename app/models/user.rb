@@ -27,6 +27,20 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
+  def self.looks(search,word)
+    if search == "1"
+      User.where("name LIKE?", "#{word}")
+    elsif search == "2"
+      User.where("name LIKE?", "#{word}%")
+    elsif search == "3"
+      User.where("name LIKE?", "%#{word}")
+    elsif search == "4"
+      User.where("name LIKE?", "%#{word}%")
+    else
+      User.all
+    end
+  end
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end
